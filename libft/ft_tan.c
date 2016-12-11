@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
+/*   ft_tan.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 13:28:20 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/22 14:20:35 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/11/08 14:12:21 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/08 14:27:33 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstaddend(t_list **alst, t_list *new)
+float	ft_tan(float x)
 {
-	t_list *tmp;
-
-	tmp = *alst;
-	if (*alst == NULL)
-	{
-		*alst = new;
-		return ;
-	}
-	while ((*alst)->next != NULL)
-		*alst = (*alst)->next;
-	(*alst)->next = new;
-	*alst = tmp;
+	return (ft_sin(x) / ft_cos(x));
 }

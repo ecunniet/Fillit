@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <hsabouri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 20:14:44 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/22 16:29:32 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/08/05 09:28:35 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/04 16:53:50 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
-	int		i;
-	int		j;
+	size_t	total;
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
 
-	if (s1 == NULL || s2 == NULL)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	total = len1 + len2;
+	str = ft_strnew(total);
+	if (str == NULL)
 		return (NULL);
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	if (!(str = (char*)malloc(sizeof(char) * (i + j + 1))))
-		return (NULL);
-	str = ft_strcpy(str, s1);
-	str = ft_strcat(str, s2);
+	i = 0;
+	while (i < len1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i - len1 < len2)
+	{
+		str[i] = s2[i - len1];
+		i++;
+	}
+	str[i] = '\0';
 	return (str);
 }

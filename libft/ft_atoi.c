@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 17:36:01 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/16 13:48:01 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/11/05 11:48:40 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/09 19:36:16 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 int		ft_atoi(const char *str)
 {
-	int i;
-	int sign;
-	int res;
+	long	nb;
+	int		power;
 
-	i = 0;
-	sign = 1;
-	res = 0;
-	while (ft_isspace(str[i]) == 1)
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	nb = 0;
+	power = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*(str) == '-')
 	{
-		sign = (str[i] == '-') ? -1 : 1;
-		i++;
+		power = -1;
+		str++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	else if (*(str) == '+')
+		str++;
+	while (*str <= '9' && *str >= '0')
 	{
-		res = res * 10 + (str[i] - '0');
-		i++;
+		nb += (*str - '0') * power;
+		nb *= 10;
+		str++;
 	}
-	return (sign * res);
+	return ((int)(nb / 10));
 }

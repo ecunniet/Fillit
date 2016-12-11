@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strstr.c                                           :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 17:14:54 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/16 12:42:52 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/11/05 11:18:36 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/06 12:09:11 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 char	*ft_strstr(const char *big, const char *little)
 {
-	int	i;
-	int	j;
-	int z;
+	size_t	i;
+	size_t	j;
+	size_t	little_len;
+	char	*ptr;
 
-	i = ft_strlen(little);
-	j = 0;
-	z = 0;
-	if (i == 0)
-		return ((char*)big);
-	while (big[j] != '\0')
+	i = 0;
+	little_len = ft_strlen(little);
+	ptr = (char *)big;
+	if (little[0] == '\0')
+		return (ptr);
+	while (big[i])
 	{
-		if (big[j] == little[z])
-		{
-			while (big[j + z] == little[z] && z < i)
-				z++;
-			if (z == i)
-				return ((char*)(big + j));
-			else
-				z = 0;
-		}
-		j++;
+		j = 0;
+		while (big[i + j] == little[j] && big[i + j] && little[j])
+			j++;
+		if (j == little_len)
+			return (ptr + i);
+		i++;
 	}
 	return (NULL);
 }

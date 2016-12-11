@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_lstgoto.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/27 15:58:23 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/27 16:00:25 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/11/16 12:27:41 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/16 12:33:23 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "libft.h"
 
+t_list	*ft_lstgoto(t_list **alst, int i)
+{
+	int		j;
+	t_list	*ptr;
+
+	j = 0;
+	if (!*alst)
+		return (NULL);
+	ptr = (*alst);
+	while (ptr->next && j < i)
+	{
+		ptr = ptr->next;
+		j++;
+	}
+	return (ptr);
+}

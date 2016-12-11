@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecunniet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 12:14:03 by ecunniet          #+#    #+#             */
-/*   Updated: 2016/11/22 14:18:40 by ecunniet         ###   ########.fr       */
+/*   Created: 2016/11/07 21:20:39 by hsabouri          #+#    #+#             */
+/*   Updated: 2016/11/07 22:03:30 by hsabouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+static t_list	*ft_lstmapmaker(t_list *lst, t_list *dst,
+		t_list *(*f)(t_list *elem))
 {
-	t_list *new;
-
-	new = NULL;
-	while (lst != NULL)
+	if (lst)
 	{
-		ft_lstaddend(&new, f(lst));
-		lst = lst->next;
+		dst = (*f)(lst);
+		dst->next = ft_lstmapmaker(lst->next, dst->next, f);
 	}
-	return (new);
+	else
+		dst = NULL;
+	return (dst);
+}
+
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+{
+	t_list	*dst;
+
+	dst = NULL;
+	return (ft_lstmapmaker(lst, dst, f));
 }
